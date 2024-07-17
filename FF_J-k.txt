@@ -1,0 +1,77 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 30.06.2024 14:08:01
+-- Design Name: 
+-- Module Name: FF - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity FF is
+    Port ( j : in STD_LOGIC;
+           k : in STD_LOGIC;
+           clk : in STD_LOGIC;
+           q : inout STD_LOGIC;
+           q_not : inout STD_LOGIC;
+           preset : in STD_LOGIC;
+           clear : in STD_LOGIC);
+end FF;
+
+architecture Behavioral of FF is
+    signal qt :STD_LOGIC;
+begin
+
+    q_not <= not(q);
+    
+    ff: process(clk)
+    begin
+           
+        if ( rising_edge(clk)) then
+            if clear = '0'  then
+                q <= '0';
+                qt <= '0';
+            elsif preset = '0' then
+                q <= '1';
+                qt <= '1';
+            elsif (j = '0' and k = '0') then
+                q <= q;
+                qt <= qt;
+            elsif (j = '1' and k = '0') then
+                q <= '1';
+                qt <= '1';
+            elsif (j = '0' and k = '1') then
+                q <= '0';
+                qt <= '0';
+            elsif (j = '1' and k = '1') then   
+                q <= not(qt);
+                    
+                    end if;
+                end if;
+end process;
+
+
+end Behavioral;
